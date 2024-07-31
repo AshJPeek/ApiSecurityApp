@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using ApiSecurity.Constants;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -25,7 +26,8 @@ namespace ApiSecurity.Controllers
 
         // GET api/<UsersController>/5
         [HttpGet("{id}")]
-        [Authorize]
+        [Authorize(Policy = PolicyConstants.MustHaveEmployeeId)]
+        [Authorize(Policy = PolicyConstants.MustBeAVeteranEmployee)]
         public string Get(int id)
         {
             return _config.GetConnectionString("Default");
